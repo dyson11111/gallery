@@ -1,26 +1,26 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Photogallery</title>
+    <title>Photo Gallery</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="main-gallery">
-        <h1>Vetrina delle Immagini</h1>
-        <div class="gallery" id="main-gallery">
-            <!-- Le immagini verranno inserite qui tramite JavaScript -->
-        </div>
-    </div>
+    <h1>Vetrina delle Immagini</h1>
+    <div id="main-gallery" class="gallery-container"></div>
 
-    <!-- Galleria -->
-    <div id="gallery1" class="photo-gallery">
+    <!-- Esempi di gallerie, aggiungi qui tutte le gallerie necessarie -->
+    <div id="gallery1" class="photo-gallery" style="display:none;">
         <button class="close-btn" onclick="closeGallery('gallery1')">X</button>
         <h2>Photogallery 1</h2>
-        <div class="gallery" id="gallery1-content">
-            <!-- Le immagini verranno inserite qui tramite JavaScript -->
-        </div>
+        <div class="gallery" id="gallery1-content"></div>
+    </div>
+    
+    <div id="gallery2" class="photo-gallery" style="display:none;">
+        <button class="close-btn" onclick="closeGallery('gallery2')">X</button>
+        <h2>Photogallery 2</h2>
+        <div class="gallery" id="gallery2-content"></div>
     </div>
 
     <script src="script.js"></script>
