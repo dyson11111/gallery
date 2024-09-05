@@ -30,11 +30,19 @@ function loadImages() {
 }
 
 function openGallery(galleryId) {
-    document.getElementById(galleryId).style.display = 'block';
+    const gallery = document.getElementById(galleryId);
+    if (gallery) {
+        gallery.style.display = 'block';
+    } else {
+        console.error(`Galleria con ID ${galleryId} non trovata`);
+    }
 }
 
 function closeGallery(galleryId) {
-    document.getElementById(galleryId).style.display = 'none';
+    const gallery = document.getElementById(galleryId);
+    if (gallery) {
+        gallery.style.display = 'none';
+    }
 }
 
 function addVetrinaImage() {
