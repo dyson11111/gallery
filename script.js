@@ -10,7 +10,10 @@ function loadImages() {
     data.vetrina.forEach(item => {
         const div = document.createElement('div');
         div.className = 'gallery-item';
-        div.onclick = () => openGallery(item.id);
+        div.onclick = () => {
+            console.log(`Cliccato sulla vetrina con ID: ${item.id}`); // Debug
+            openGallery(item.id);
+        };
         div.innerHTML = `<img src="${item.src}" alt="${item.alt}"><p>${item.alt}</p>`;
         mainGallery.appendChild(div);
     });
@@ -30,6 +33,7 @@ function loadImages() {
 }
 
 function openGallery(galleryId) {
+    console.log(`Tentativo di apertura della galleria con ID: ${galleryId}`); // Debug
     const gallery = document.getElementById(galleryId);
     if (gallery) {
         gallery.style.display = 'block';
