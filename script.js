@@ -1,37 +1,60 @@
-<!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pannello Admin</title>
-    <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-    <h1>Pannello di Amministrazione</h1>
-    <form id="admin-form">
-        <h2>Aggiungi Immagine alla Vetrina</h2>
-        <label for="vetrina-src">URL Immagine:</label>
-        <input type="text" id="vetrina-src" required>
-        <label for="vetrina-alt">Testo Alternativo:</label>
-        <input type="text" id="vetrina-alt" required>
-        <label for="vetrina-id">ID Galleria:</label>
-        <input type="text" id="vetrina-id" required>
-        <button type="button" onclick="addVetrinaImage()">Aggiungi</button>
-    </form>
+document.addEventListener('DOMContentLoaded', function() {
+    loadImages();
+});
 
-    <h2>Aggiungi Immagine alla Galleria</h2>
-    <form id="gallery-form">
-        <label for="gallery-id">ID Galleria:</label>
-        <input type="text" id="gallery-id" required>
-        <label for="gallery-src">URL Immagine:</label>
-        <input type="text" id="gallery-src" required>
-        <label for="gallery-alt">Testo Alternativo:</label>
-        <input type="text" id="gallery-alt" required>
-        <label for="gallery-desc">Descrizione:</label>
-        <input type="text" id="gallery-desc" required>
-        <button type="button" onclick="addGalleryImage()">Aggiungi</button>
-    </form>
+function loadImages() {
+    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
 
-    <script src="script.js"></script>
-</body>
-</html>
+    const mainGallery = document.getElementById('main-gallery');
+    data.vetrina.forEach(item => {
+        const div = document.createElement('div');
+        div.className = 'gallery-item';
+        div.onclick = () => openGallery(item.id);
+        div.innerHTML = `<img src="${item.src}" alt="${item.alt}"><p>${item.alt}</p>`;
+        mainGallery.appendChild(div);
+    });
+
+    for (const [key, gallery] of Object.entries(data)) {
+        if (key.startsWith('gallery')) {
+            const galleryContent = document.getElementById(`${key}-content`);
+            gallery.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'gallery-item';
+                div.innerHTML = `<img src="${item.src}" alt="${item.alt}"><p>${item.description}</p>`;
+                galleryContent.appendChild(div);
+            });
+        }
+    }
+}
+
+function openGallery(galleryId) {
+    document.getElementById(galleryId).style.display = 'block';
+}
+
+function closeGallery(galleryId) {
+    document.getElementById(galleryId).style.display = 'none';
+}
+
+function addVetrinaImage() {
+    const src = document.getElementById('vetrina-src').value;
+    const alt = document.getElementById('vetrina-alt').value;
+    const id = document.getElementById('vetrina-id').value;
+
+    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
+    data.vetrina.push({ src, alt, id });
+    localStorage.setItem('galleryData', JSON.stringify(data));
+    location.reload();
+}
+
+function addGalleryImage() {
+    const id = document.getElementById('gallery-id').value;
+    const src = document.getElementById('gallery-src').value;
+    const alt = document.getElementById('gallery-alt').value;
+    const description = document.getElementById('gallery-desc').value;
+
+    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
+    if (!data[id]) data[id] = [];
+    data[id].push({ src, alt, description });
+    localStorage.setItem('galleryData', JSON.stringify(data));
+    location.reload();
+}
