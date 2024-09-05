@@ -1,0 +1,38 @@
+{
+    "vetrina": [
+        {
+            "src": "https://via.placeholder.com/300",
+            "alt": "Vetrina 1",
+            "id": "gallery1"
+        },
+        {
+            "src": "https://via.placeholder.com/300",
+            "alt": "Vetrina 2",
+            "id": "gallery2"
+        }
+    ],
+    "gallery1": [
+        {
+            "src": "https://via.placeholder.com/300",
+            "alt": "Immagine 1",
+            "description": "Descrizione 1"
+        },
+        {
+            "src": "https://via.placeholder.com/300",
+            "alt": "Immagine 2",
+            "description": "Descrizione 2"
+        }
+    ],
+    "gallery2": [
+        {
+            "src": "https://via.placeholder.com/300",
+            "alt": "Immagine 1",
+            "description": "Descrizione 1"
+        },
+        {
+            "src": "https://via.placeholder.com/300",
+            "alt": "Immagine 2",
+            "description": "Descrizione 2"
+        }
+    ]
+}
