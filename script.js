@@ -3,17 +3,14 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadImages() {
-    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
+    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [], gallery2: [] };
 
     const mainGallery = document.getElementById('main-gallery');
     mainGallery.innerHTML = ''; // Clear existing content
     data.vetrina.forEach(item => {
         const div = document.createElement('div');
         div.className = 'gallery-item';
-        div.onclick = () => {
-            console.log(`Cliccato sulla vetrina con ID: ${item.id}`); // Debug
-            openGallery(item.id);
-        };
+        div.onclick = () => openGallery(item.id);
         div.innerHTML = `<img src="${item.src}" alt="${item.alt}"><p>${item.alt}</p>`;
         mainGallery.appendChild(div);
     });
@@ -54,7 +51,9 @@ function addVetrinaImage() {
     const alt = document.getElementById('vetrina-alt').value;
     const id = document.getElementById('vetrina-id').value;
 
-    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
+    console.log(`Aggiungendo immagine alla vetrina: src=${src}, alt=${alt}, id=${id}`); // Debug
+
+    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [], gallery2: [] };
     data.vetrina.push({ src, alt, id });
     localStorage.setItem('galleryData', JSON.stringify(data));
     location.reload();
@@ -66,7 +65,9 @@ function addGalleryImage() {
     const alt = document.getElementById('gallery-alt').value;
     const description = document.getElementById('gallery-desc').value;
 
-    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
+    console.log(`Aggiungendo immagine alla galleria ${id}: src=${src}, alt=${alt}, description=${description}`); // Debug
+
+    const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [], gallery2: [] };
     if (!data[id]) data[id] = [];
     data[id].push({ src, alt, description });
     localStorage.setItem('galleryData', JSON.stringify(data));
