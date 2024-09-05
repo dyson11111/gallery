@@ -6,6 +6,7 @@ function loadImages() {
     const data = JSON.parse(localStorage.getItem('galleryData')) || { vetrina: [], gallery1: [] };
 
     const mainGallery = document.getElementById('main-gallery');
+    mainGallery.innerHTML = ''; // Clear existing content
     data.vetrina.forEach(item => {
         const div = document.createElement('div');
         div.className = 'gallery-item';
@@ -17,6 +18,7 @@ function loadImages() {
     for (const [key, gallery] of Object.entries(data)) {
         if (key.startsWith('gallery')) {
             const galleryContent = document.getElementById(`${key}-content`);
+            galleryContent.innerHTML = ''; // Clear existing content
             gallery.forEach(item => {
                 const div = document.createElement('div');
                 div.className = 'gallery-item';
